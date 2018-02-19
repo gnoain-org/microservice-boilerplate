@@ -1,0 +1,17 @@
+env:
+  browser: true
+  commonjs: true
+  es6: true
+  jest: true
+plugins:
+  - prettier
+  - jest
+parserOptions:
+  ecmaVersion: 8
+  sourceType: module
+extends:
+  - eslint:recommended
+  - plugin:prettier/recommended
+  - plugin:jest/recommended
+rules:
+  prettier/prettier: error
