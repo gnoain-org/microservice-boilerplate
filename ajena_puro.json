@@ -60,6 +60,25 @@
       "delivery_time_without_stock": "2018-03-15T00:00Z"
     }
   },
+  "badges": {
+    "home_delivery": true,
+    "sts_pick_up": true,
+    "sts_companies": [
+      {
+        "name": "CELERITAS",
+        "id": "006"
+      },
+      {
+        "name": "CORREOS",
+        "id": "004"
+      },
+      {
+        "name": "SUPERCOR, S.A.",
+        "id": "002"
+      }
+    ],
+    "available_centre": true
+  },
   "category_hierarchy": [
     [
       {
@@ -94,6 +113,7 @@
       "city": "Lerez (Pontevedra)"
     }
   ],
+
   "skus": [
     {
       "providers": [
@@ -216,6 +236,5 @@
   },
   "category_id": "999.6810209013",
   "store_id": "135",
-  "product_type": "70",
-  "provider": "00000000"
+  "product_type": "70"
 }
