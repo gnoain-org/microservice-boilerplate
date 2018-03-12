@@ -1,0 +1,240 @@
+{
+  "shipping": {
+    "marketplace_shippings": {
+      "marketplace_shipping_providers": [
+        {
+          "gtin": "9788491480525",
+          "providers": [
+            {
+              "provider_id": "2107",
+              "offer": {
+                "offer_id": "5229503"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            },
+            {
+              "provider_id": "2094",
+              "offer": {
+                "offer_id": "4386078"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "delivery_time_with_stock": "2018-03-15T00:00Z",
+      "delivery_time_without_stock": "2018-03-15T00:00Z"
+    }
+  },
+  "badges": {
+    "home_delivery": true,
+    "sts_pick_up": true,
+    "sts_companies": [
+      {
+        "name": "CELERITAS",
+        "id": "006"
+      },
+      {
+        "name": "CORREOS",
+        "id": "004"
+      },
+      {
+        "name": "SUPERCOR, S.A.",
+        "id": "002"
+      }
+    ],
+    "available_centre": true
+  },
+  "category_hierarchy": [
+    [
+      {
+        "category_name": "Varios",
+        "category_id": "999.6810209013"
+      },
+      {
+        "category_name": "Libros",
+        "category_id": "999.54302013"
+      }
+    ]
+  ],
+  "marketplace_type_reference": "02",
+  "marketplace_show_offers": true,
+  "marketplace_providers_details": [
+    {
+      "business_name": "AGAPEA FACTORY S.A.",
+      "cif": "A92508720",
+      "address": "C/ Bodegueros 43",
+      "provider_id": 2107,
+      "postal_code": "29006",
+      "name": "AG Libros",
+      "city": "Málaga"
+    },
+    {
+      "business_name": "SERLOGAL 2.0 S.L.",
+      "cif": "B-94062411",
+      "address": "O Castelo, 33",
+      "provider_id": 2094,
+      "postal_code": "36156",
+      "name": "IMOSVER",
+      "city": "Lerez (Pontevedra)"
+    }
+  ],
+
+  "skus": [
+    {
+      "providers": [
+        {
+          "provider_id": "2107",
+          "name": "AG Libros",
+          "offer": {
+            "offer_id": "5229503",
+            "price": "20 EUR",
+            "sale_price": "19 EUR",
+            "discount": 5.0,
+            "stock": 2
+          },
+          "delivery_time_with_stock": "2018-03-15T00:00Z",
+          "delivery_time_without_stock": "2018-03-15T00:00Z"
+        },
+        {
+          "provider_id": "2094",
+          "name": "IMOSVER",
+          "offer": {
+            "offer_id": "4386078",
+            "price": "20 EUR",
+            "sale_price": "19 EUR",
+            "discount": 5.0,
+            "stock": 1
+          },
+          "delivery_time_with_stock": "2018-03-08T00:00Z",
+          "delivery_time_without_stock": "2018-03-08T00:00Z"
+        }
+      ],
+      "only_marketplace_offers": true,
+      "image_link": {
+        "small": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_210x210.jpg",
+          "ratio": 1.0
+        },
+        "medium": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_440x440.jpg",
+          "ratio": 1.0
+        },
+        "big": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_640x640.jpg",
+          "ratio": 1.0
+        }
+      },
+      "sku": "9788491480525",
+      "gtin": "9788491480525",
+      "edition_date": "2016-12-27T00:00Z",
+      "color": "Verde",
+      "image_color": {
+        "title": "Color Verde",
+        "url":
+          "//sgfm.elcorteingles.es/SGFM/dctm/NO_RENDER02/201205/10/___11929O2.png",
+        "ratio": 1
+      },
+      "sizes": {
+        "description": ["Español", "Fabricante"],
+        "sizes": [
+          {
+            "title": "Talla",
+            "sizes": ["36", "XS"]
+          }
+        ]
+      },
+      "add_to_cart": "ADD"
+    }
+  ],
+  "priority_image": {
+    "small": {
+      "url":
+        "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_210x210.jpg",
+      "ratio": 1.0
+    },
+    "medium": {
+      "url":
+        "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_440x440.jpg",
+      "ratio": 1.0
+    },
+    "big": {
+      "url":
+        "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_640x640.jpg",
+      "ratio": 1.0
+    }
+  },
+  "attribute_groups": [
+    {
+      "type": "TABLE",
+      "attributes": [
+        {
+          "name": "Idioma: ",
+          "values": {
+            "values": [
+              {
+                "value": "Español"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "description": [
+    {
+      "value": [
+        "Responsabilidad social corporativa. El papel de las Naciones Unidas y otras organizaciones internacionales en la promoción de la RSC"
+      ],
+      "title": ["Sinopsis"]
+    }
+  ],
+  "id": "MP_0008552_9788491480525",
+  "group_type": "SINGLE",
+  "title":
+    "Responsabilidad social corporativa. El papel de las Naciones Unidas y otras organizaciones internacionales en la promoción de la RSC",
+  "brand": {
+    "value": "892990056",
+    "name": "DYKINSON"
+  },
+  "category_id": "999.6810209013",
+  "store_id": "135",
+  "product_type": "70"
+}
