@@ -3,6 +3,10 @@ const R = require('ramda');
 const input = require('./input');
 
 const locale = 'fr_FR';
+const query = {
+  expand: 'locales',
+  locale: 'fr_FR'
+};
 
 const getLocalizedFields = R.curry((locale, source) => {
   const localePaths = [
@@ -45,20 +49,24 @@ const filterDeepBy = R.curry((func, value) => {
 
 const result = R.pipe(
   R.filter(R.path(['name_locales', locale])),
-  R.map(category => {
-    const categoryLocales = R.keys(category.name_locales);
-    const locales = R.map(
-      R.applySpec({
-        id: R.identity,
-        values: getLocalizedFields(R.__, category)
-      }),
-      categoryLocales
-    );
-    const localizedFields = getLocalizedFields(locale, category);
-    const test = R.mergeDeepRight(category, localizedFields);
-    test.locales = locales;
-    return test;
-  }),
+  R.map(
+    R.converge(R.unapply(R.reduce(R.mergeDeepRight, {})), [
+      R.identity,
+      getLocalizedFields(locale),
+      R.pipe(
+        R.converge(R.map, [
+          R.pipe(
+            R.unary(R.flip(getLocalizedFields)),
+            R.objOf('values'),
+            R.merge({ id: R.identity }),
+            R.applySpec
+          ),
+          R.pipe(R.propOr({}, 'name_locales'), R.keys)
+        ]),
+        R.objOf('locales')
+      )
+    ])
+  ),
   filterDeepBy(value => typeof value !== 'undefined')
 )(input.children);
 
