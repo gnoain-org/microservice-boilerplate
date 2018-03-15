@@ -20,7 +20,7 @@ const getLocalizedFields = R.curry((locale, source) => {
 
   return R.reduce(
     (acc, path) => {
-      const temp = R.useWith(
+      return R.useWith(
         R.converge(R.unapply(R.reduce(R.mergeDeepRight, {})), [
           R.pipe(
             R.append(locale),
@@ -32,8 +32,6 @@ const getLocalizedFields = R.curry((locale, source) => {
         ]),
         [R.adjust(R.flip(R.concat)('_locales'), -1)]
       )(path);
-
-      return temp;
     },
     {},
     localizedPaths
