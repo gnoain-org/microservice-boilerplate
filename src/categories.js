@@ -1,15 +1,15 @@
 const R = require('ramda');
 
-const input = require('./input');
+//const input = require('./input_categories');
 
 const locale = 'fr_FR';
-const query = {
-  expand: 'locales',
-  locale: 'fr_FR'
-};
+// const query = {
+//   expand: 'locales',
+//   locale: 'fr_FR'
+// };
 
 const getLocalizedFields = R.curry((locale, source) => {
-  const localePaths = [
+  const localizedPaths = [
     ['name'],
     ['description'],
     ['previous_names'],
@@ -20,21 +20,23 @@ const getLocalizedFields = R.curry((locale, source) => {
 
   return R.reduce(
     (acc, path) => {
-      var test = R.pipe(
-        R.adjust(R.flip(R.concat)('_locales'), -1),
-        localePath => {
-          acc = R.assocPath(localePath, undefined, acc);
-          return R.pipe(
+      const temp = R.useWith(
+        R.converge(R.unapply(R.reduce(R.mergeDeepRight, {})), [
+          R.pipe(
             R.append(locale),
-            R.flip(R.path)(source),
-            R.assocPath(path, R.__, acc)
-          )(localePath);
-        }
+            R.path(R.__, source),
+            R.assocPath(path, R.__, {})
+          ),
+          R.assocPath(R.__, undefined, {}),
+          R.always(acc)
+        ]),
+        [R.adjust(R.flip(R.concat)('_locales'), -1)]
       )(path);
-      return test;
+
+      return temp;
     },
     {},
-    localePaths
+    localizedPaths
   );
 });
 
@@ -47,27 +49,28 @@ const filterDeepBy = R.curry((func, value) => {
   }
 });
 
-const result = R.pipe(
-  R.filter(R.path(['name_locales', locale])),
-  R.map(
-    R.converge(R.unapply(R.reduce(R.mergeDeepRight, {})), [
-      R.identity,
-      getLocalizedFields(locale),
-      R.pipe(
-        R.converge(R.map, [
-          R.pipe(
-            R.unary(R.flip(getLocalizedFields)),
-            R.objOf('values'),
-            R.merge({ id: R.identity }),
-            R.applySpec
-          ),
-          R.pipe(R.propOr({}, 'name_locales'), R.keys)
-        ]),
-        R.objOf('locales')
-      )
-    ])
-  ),
-  filterDeepBy(value => typeof value !== 'undefined')
-)(input.children);
+const cleanObject = filterDeepBy(value => typeof value !== 'undefined');
 
-console.log(result);
+const transformCategory = R.ifElse(
+  R.path(['name_locales', locale]),
+  R.converge(R.unapply(R.reduce(R.mergeDeepRight, {})), [
+    R.evolve({ children: R.map(c => transformCategory(c)) }),
+    getLocalizedFields(locale),
+    R.pipe(
+      R.converge(R.map, [
+        R.pipe(
+          R.unary(R.flip(getLocalizedFields)),
+          R.objOf('values'),
+          R.merge({ id: R.identity }),
+          R.applySpec
+        ),
+        R.pipe(R.propOr({}, 'name_locales'), R.keys)
+      ]),
+      R.objOf('locales')
+    )
+  ]),
+  R.always(undefined)
+);
+
+const adaptCategory = R.pipe(transformCategory, cleanObject);
+const adaptCategories = R.pipe(R.map(transformCategory), cleanObject);
