@@ -9,7 +9,6 @@ const assocPathWith = R.curry((path, fn, obj) => {
       R.head,
       R.prop(R.__, obj),
       R.ifElse(R.is(Array), R.map(fn), fn),
-      R.when(R.allPass([R.is(Array), R.all(R.isNil)]), R.always(undefined)),
       R.assoc(currentPath, R.__, obj)
     ),
     R.pipe(

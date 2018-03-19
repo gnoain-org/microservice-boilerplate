@@ -1,14 +1,14 @@
 const R = require('ramda');
 const adaptCategory = require('./category');
 
-const filterDeepBy = require('util/filterDeepBy');
+const filterDeepBy = require('../util/filterDeepBy');
 const cleanObject = filterDeepBy(value => typeof value !== 'undefined');
 
 const adaptCategories = ctx => {
-  const categories = ctx.body;
+  const categories = ctx.body.data;
 
   return R.pipe(
-    R.map(category => adaptCategory(R.merge(ctx, { body: category }))),
+    R.map(category => adaptCategory(R.assoc('body', { data: category }, ctx))),
     cleanObject
   )(categories);
 };
