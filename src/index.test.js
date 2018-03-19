@@ -1,7 +1,9 @@
-const adapter = require('./adaptions/categories');
+const request = require('supertest');
+const app = require('./index');
 
-const input = require('./input_categories');
-
-console.log(
-  adapter.adaptCategories({ body: input.children, query: { locale: 'fr_FR' } })
-);
+describe('Server Index', () => {
+  test('It should say hello', async () => {
+    const response = await request(app.callback()).get('/');
+    expect(response.text).toMatchSnapshot();
+  });
+});

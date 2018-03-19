@@ -1,5 +1,7 @@
 const R = require('ramda');
-const filterDeepBy = require('utils/filter-deep-by');
+
+const filterDeepBy = require('util/filterDeepBy');
+const cleanObject = filterDeepBy(value => typeof value !== 'undefined');
 
 const getLocalizedFields = R.curry((locale, source) => {
   const localizedPaths = [
@@ -30,8 +32,6 @@ const getLocalizedFields = R.curry((locale, source) => {
     localizedPaths
   );
 });
-
-const cleanObject = filterDeepBy(value => typeof value !== 'undefined');
 
 const transformCategory = R.curry((locale, category) => {
   return R.ifElse(
