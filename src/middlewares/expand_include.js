@@ -3,84 +3,111 @@ const assocPathWith = require('../util/assocPathWith');
 const filterDeepBy = require('../util/filterDeepBy');
 
 const applyExpandAndInclude = async (ctx, next) => {
-  ctx.query.include = R.pipe(
+  ctx.state.include = R.pipe(
     R.pathOr('', ['query', 'include']),
     R.split(','),
-    R.reject(R.isEmpty)
-  )(ctx);
-  ctx.query.expand = R.pipe(
-    R.pathOr('', ['query', 'expand']),
-    R.split(','),
     R.reject(R.isEmpty),
-    R.chain(path => {
-      // const fn = (str, result) => {
-      //   if (str === '') {
-      //     return result;
-      //   } else {
-      //     const index = R.lastIndexOf('.', str);
-      //     return fn(str.substr(0, index), result.concat(str));
-      //   }
-      // };
-
-      // const fn = (str, result) => {
-      //   const index = R.lastIndexOf('.', str);
-      //   if (index === -1) {
-      //     return result.concat(str);
-      //   } else {
-      //     return fn(str.substr(0, index), result.concat(str));
-      //   }
-      // };
-      // return fn(path, []);
-
-      const pathParts = path.split('.');
-      const fn = R.map(part => {
-        return R.join(
-          '.',
-          R.slice(R.indexOf(part, pathParts), Infinity, pathParts)
-        );
-      });
-      const caca = fn(path.split('.'));
-
-      // const fn = (pathParts, result) => {
-      //   if (R.isEmpty(pathParts)) {
-      //     return result;
-      //   } else {
-      //     result.push(pathParts.join('.'));
-      //     return fn(R.init(pathParts), result);
-      //   }
-      // };
-      return fn(path.split('.'));
-    })
-  )(ctx);
-  await next();
-  const getPathsToExclude = R.pipe(
-    R.converge(R.unapply(R.identity), [
-      R.pipe(
-        R.path(['state', 'route', 'parameters']),
-        R.chain(R.prop('values'))
-      ),
-      R.converge(R.concat, [
-        R.path(['query', 'include']),
-        R.path(['query', 'expand'])
-      ])
-    ]),
-    R.map(R.pipe(R.sortWith([R.descend(R.length)]), R.uniqWith(R.startsWith))),
-    R.apply(R.difference),
     R.map(R.split('.'))
+  )(ctx);
+
+  ctx.state.exclude = getPathsToExclude(ctx);
+
+  const getAllExcludablePaths = R.pipe(
+    R.pathOr([], ['state', 'route', 'parameters']),
+    R.filter(R.pipe(R.prop('name'), R.contains(R.__, ['expand', 'include']))),
+    R.pluck('values'),
+    R.flatten,
+    R.uniq
   );
-  const applyExclusion = R.pipe(
-    getPathsToExclude,
-    R.tap(R.bind(console.log, console)),
-    R.reduce(R.flip(assocPathWith(R.__, R.always(undefined))), ctx.body.data)
+
+  const getPathsToKeep = R.pipe(
+    R.propOr({}, 'query'),
+    R.pick(['include', 'expand']),
+    R.values,
+    R.join(','),
+    R.split(','),
+    R.chain(path =>
+      R.pipe(
+        R.split('.'),
+        R.length,
+        R.inc,
+        R.range(1),
+        R.chain(times => R.join('.', path.split('.', times)))
+      )(path)
+    ),
+    R.uniq
   );
-  const applyIncludeAndExpand = R.converge(
-    R.reduce(R.flip(assocPathWith(R.__, R.prop('id')))),
-    [applyExclusion, R.pipe(R.path(['query', 'include']), R.map(R.split('.')))]
+
+  const getPathsToExclude = R.converge(R.difference, [
+    getAllExcludablePaths,
+    getPathsToKeep
+  ]);
+
+  await next();
+  // const getPathsToExcludeCaca = R.pipe(
+  //   R.converge(R.unapply(R.identity), [
+  //     R.pipe(
+  //       R.path(['state', 'route', 'parameters']),
+  //       R.chain(R.prop('values'))
+  //     ),
+  //     R.converge(R.concat, [
+  //       R.path(['query', 'include']),
+  //       R.path(['query', 'expand'])
+  //     ])
+  //   ]),
+  //   R.map(R.pipe(R.sortWith([R.descend(R.length)]), R.uniqWith(R.startsWith))),
+  //   R.apply(R.difference),
+  //   R.map(R.split('.'))
+  // );
+
+  // const pene = R.juxt([
+  //   R.always(R.prop(['body', 'data'])),
+  //   R.pipe(
+  //     R.path(['state', 'exclude']),
+  //     R.reduce(R.flip(assocPathWith(R.__, R.always(undefined))), R.__)
+  //   ),
+  //   R.pipe(
+  //     R.path(['state', 'include']),
+  //     R.reduce(R.flip(assocPathWith(R.__, R.prop('id'))), R.__)
+  //   )
+  // ]);
+
+  // ctx.body.data = R.apply(R.pipe, pene(ctx))(ctx);
+
+  // R.pipe(
+  //   R.path(['state', 'exclude']),
+  //   R.map(R.concat(['body', 'data'])),
+  //   R.reduce(R.flip(assocPathWith(R.__, R.always(undefined))), ctx)
+  // );
+
+  // const applyInclusion = R.pipe(
+  //   R.path(['state', 'include']),
+  //   R.reduce(R.flip(assocPathWith(R.__, R.prop('id'))))
+  // );
+
+  // R.converge(R.reduce(R.flip(assocPathWith(R.__, R.prop('id')))), [
+  //   applyExclusion,
+  //   R.pipe(R.path(['query', 'include']), R.map(R.split('.')))
+  // ]);
+
+  const assocPathsWith = R.curry((paths, fn, target) =>
+    R.reduce(R.flip(assocPathWith(R.__, fn)), target, paths)
   );
+
+  const applyExclusion = R.converge(
+    assocPathsWith(R.__, R.always(undefined), R.__),
+    [R.path(['state', 'exclude']), R.identity]
+  );
+
+  const applyInclusion = R.converge(assocPathsWith(R.__, R.prop('id'), R.__), [
+    R.path(['state', 'include']),
+    R.identity
+  ]);
 
   const doStuff = ctx =>
     R.pipe(
-      applyIncludeAndExpand,
+      applyExclusion,
+      applyInclusion,
       filterDeepBy(value => typeof value !== 'undefined'),
       filterDeepBy(R.complement(R.isEmpty))
     )(ctx);
