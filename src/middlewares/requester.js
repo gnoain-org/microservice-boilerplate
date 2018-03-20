@@ -7,7 +7,7 @@ const makeRequest = async (ctx, next) => {
     method: ctx.state.method
   });
   ctx.body = {
-    data: result.data.children
+    data: result.data
   };
   return next();
 };

@@ -34,11 +34,32 @@ router.get('/categories', async (ctx, next) => {
   await next();
 });
 
+router.get('/categories/:categoryId', async (ctx, next) => {
+  ctx.state.url = `http://api.eci.geci/ecommerce/category/${
+    ctx.params.categoryId
+  }`;
+  ctx.state.method = 'GET';
+  ctx.state.route = { adaption_path: __dirname + '/adaptions/category' };
+  ctx.state.route.parameters = [
+    {
+      name: 'include',
+      values: ['locales', 'children', 'children.locales']
+    },
+    {
+      name: 'expand',
+      values: ['locales', 'children', 'children.locales']
+    }
+  ];
+  await next();
+});
+
 app.use(router.routes());
+app.use(require('./middlewares/error_handler'));
 app.use(require('./middlewares/postal_code_filter'));
 app.use(require('./middlewares/expand_include'));
 app.use(require('./middlewares/response_filter'));
 app.use(require('./middlewares/response_adapter'));
+app.use(require('./middlewares/locale_checker'));
 app.use(require('./middlewares/requester'));
 
 app.listen(4033);

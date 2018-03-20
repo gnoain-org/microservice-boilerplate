@@ -37,7 +37,7 @@ const transformCategory = R.curry((locale, category) => {
   return R.ifElse(
     R.path(['name_locales', locale]),
     R.converge(R.unapply(R.reduce(R.mergeDeepRight, {})), [
-      R.evolve({ children: R.map(c => transformCategory(c)) }),
+      R.evolve({ children: R.map(child => transformCategory(locale, child)) }),
       getLocalizedFields(locale),
       R.pipe(
         R.converge(R.map, [
@@ -57,7 +57,7 @@ const transformCategory = R.curry((locale, category) => {
 });
 
 const adaptCategory = ctx => {
-  const locale = ctx.query.locale;
+  const locale = R.pathOr('es_ES', ['query', 'locale'], ctx);
   const category = ctx.body.data;
   return R.pipe(transformCategory(locale), cleanObject)(category);
 };
