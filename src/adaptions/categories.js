@@ -5,10 +5,12 @@ const filterDeepBy = require('../util/filterDeepBy');
 const cleanObject = filterDeepBy(value => typeof value !== 'undefined');
 
 const adaptCategories = ctx => {
-  const categories = ctx.body.data.children;
+  const categories = ctx.state.body.data.children;
 
   return R.pipe(
-    R.map(category => adaptCategory(R.assoc('body', { data: category }, ctx))),
+    R.map(category =>
+      adaptCategory(R.assocPath(['state', 'body'], { data: category }, ctx))
+    ),
     cleanObject
   )(categories);
 };

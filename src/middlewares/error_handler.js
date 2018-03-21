@@ -4,7 +4,7 @@ const handleError = async (ctx, next) => {
   } catch (err) {
     ctx.status = err.status || 500;
     ctx.body = err.error;
-    // ctx.app.emit('error', err, ctx);
+    ctx.app.emit('error', err, ctx);
     // next();
   }
 };

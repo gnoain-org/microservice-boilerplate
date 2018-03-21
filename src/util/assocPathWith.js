@@ -13,7 +13,7 @@ const assocPathWith = R.curry((path, fn, obj) => {
     ),
     R.pipe(
       R.tail,
-      R.of,
+      // R.of,
       assocPathWith(R.__, fn),
       R.when(R.always(R.is(Array, currentValue)), R.map),
       R.apply(R.__, R.of(currentValue)),

@@ -55,6 +55,7 @@ router.get('/categories/:categoryId', async (ctx, next) => {
 
 app.use(router.routes());
 app.use(require('./middlewares/error_handler'));
+app.use(require('./middlewares/request_initializer'));
 app.use(require('./middlewares/postal_code_filter'));
 app.use(require('./middlewares/expand_include'));
 app.use(require('./middlewares/response_filter'));

@@ -6,7 +6,7 @@ const makeRequest = async (ctx, next) => {
     url: ctx.state.url,
     method: ctx.state.method
   });
-  ctx.body = {
+  ctx.state.body = {
     data: result.data
   };
   return next();

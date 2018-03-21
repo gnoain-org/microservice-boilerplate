@@ -57,8 +57,12 @@ const transformCategory = R.curry((locale, category) => {
 });
 
 const adaptCategory = ctx => {
-  const locale = R.pathOr('es_ES', ['query', 'locale'], ctx);
-  const category = ctx.body.data;
+  const locale = R.pathOr(
+    'es_ES',
+    ['state', 'request', 'query', 'locale'],
+    ctx
+  );
+  const category = ctx.state.body.data;
   return R.pipe(transformCategory(locale), cleanObject)(category);
 };
 
