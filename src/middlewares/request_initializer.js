@@ -9,6 +9,7 @@ const initializeRequest = async (ctx, next) => {
       params: ctx.params
     }
   });
+  ctx.state.filters = [];
   await next();
 
   ctx.body = ctx.state.body;

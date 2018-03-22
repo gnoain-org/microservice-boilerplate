@@ -5,7 +5,6 @@ const handleError = async (ctx, next) => {
     ctx.status = err.status || 500;
     ctx.body = err.error;
     ctx.app.emit('error', err, ctx);
-    // next();
   }
 };
 module.exports = handleError;
