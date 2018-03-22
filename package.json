@@ -10,7 +10,11 @@
     "precommit": "pretty-quick --staged"
   },
   "dependencies": {
-    "koa": "^2.4.1"
+    "axios": "^0.18.0",
+    "joi": "^13.1.2",
+    "koa": "^2.4.1",
+    "koa-router": "^7.4.0",
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
     "eslint": "^4.17.0",

@@ -1,0 +1,89 @@
+{
+  "name": "categories",
+  "version": "1.0.0",
+  "servers": {
+    "uat": "http://***.uat.eci.geci",
+    "nft": "http://***.nft.eci.geci",
+    "pro": "http://***.eci.geci"
+  },
+  "upstreams": {
+    "uat": "http://api.uat.eci.geci/ecommerce",
+    "nft": "http://api.nft.eci.geci/ecommerce",
+    "pro": "http://api.eci.geci/ecommerce"
+  },
+  "routes": [
+    {
+      "method": "GET",
+      "path": { "url": "/", "upstream": "sss" },
+      "query": [
+        {
+          "name": "expand",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["locales"]
+            }
+          }
+        },
+        {
+          "name": "include",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["locales"]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z]{2}_[A-Z]{2}$"
+            }
+          }
+        },
+        {
+          "name": "postal_code",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "plugins": [
+        {
+          "name": "custom",
+          "config": {
+            "name": "postal_code_filter"
+          }
+        },
+        {
+          "name": "response_transformer",
+          "config": {
+            "transformations": [
+              {
+                "source": "body",
+                "condition": "success",
+                "adaption": "categories_success"
+              }
+            ]
+          }
+        },
+        {
+          "name": "custom",
+          "condition": "success",
+          "config": {
+            "name": "locale_checker"
+          }
+        }
+      ]
+    }
+  ]
+}
