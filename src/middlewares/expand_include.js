@@ -3,7 +3,7 @@ const assocPathWith = require('../util/assocPathWith');
 const filterDeepBy = require('../util/filterDeepBy');
 const filterDeepByRecursive = require('../util/filterDeepByRecursive');
 
-const applyExpandAndInclude = async (ctx, next) => {
+const applyExpandAndInclude = R.curry(async (api, route, ctx, next) => {
   ctx.state.include = R.pipe(
     R.pathOr('', ['state', 'request', 'query', 'include']),
     R.split(','),
@@ -83,6 +83,6 @@ const applyExpandAndInclude = async (ctx, next) => {
   } else {
     doStuff(ctx);
   }
-};
+});
 
 module.exports = applyExpandAndInclude;

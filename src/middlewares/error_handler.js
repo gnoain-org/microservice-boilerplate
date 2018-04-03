@@ -1,4 +1,6 @@
-const handleError = async (ctx, next) => {
+const R = require('ramda');
+
+const handleError = R.curry(async (api, route, ctx, next) => {
   try {
     await next();
   } catch (err) {
@@ -6,5 +8,5 @@ const handleError = async (ctx, next) => {
     ctx.body = err.error;
     ctx.app.emit('error', err, ctx);
   }
-};
+});
 module.exports = handleError;

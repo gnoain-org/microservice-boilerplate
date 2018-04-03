@@ -1,15 +1,15 @@
 const axios = require('axios');
 const R = require('ramda');
 
-const makeRequest = async (ctx, next) => {
+const makeRequest = R.curry(async (api, route, ctx, next) => {
   const result = await axios({
-    url: ctx.state.url,
-    method: ctx.state.method
+    url: ctx.upstream.request.url,
+    method: ctx.upstream.request.method
   });
   ctx.state.body = {
     data: result.data
   };
-  return next();
-};
+  await next();
+});
 
 module.exports = makeRequest;

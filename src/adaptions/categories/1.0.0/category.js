@@ -1,6 +1,6 @@
 const R = require('ramda');
 
-const filterDeepBy = require('../util/filterDeepBy');
+const filterDeepBy = require('../../../util/filterDeepBy');
 const cleanObject = filterDeepBy(value => typeof value !== 'undefined');
 
 const getLocalizedFields = R.curry((locale, source) => {
