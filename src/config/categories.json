@@ -6,15 +6,15 @@
     "nft": "http://***.nft.eci.geci",
     "pro": "http://***.eci.geci"
   },
-  "upstreams": {
-    "uat": "http://api.uat.eci.geci/ecommerce",
+  "upstream": {
+    "uat": "http://api.eci.geci/ecommerce",
     "nft": "http://api.nft.eci.geci/ecommerce",
     "pro": "http://api.eci.geci/ecommerce"
   },
   "routes": [
     {
       "method": "GET",
-      "path": { "url": "/", "upstream": "sss" },
+      "path": { "url": "/categories" },
       "query": [
         {
           "name": "expand",

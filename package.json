@@ -15,6 +15,7 @@
     "joi": "^13.1.2",
     "json-logic-js": "^1.2.2",
     "koa": "^2.4.1",
+    "koa-compose": "^4.0.0",
     "koa-router": "^7.4.0",
     "ramda": "^0.25.0"
   },
