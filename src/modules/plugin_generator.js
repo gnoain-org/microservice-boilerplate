@@ -15,17 +15,23 @@ const runPlugin = R.curry(async (plugin, condition, ctx, next) => {
     response: R.pick(['body', 'headers', 'status'], ctx.response)
   };
   R.when(
-    jsonLogicChecker.validateLogic(
-      R.prop('request', condition),
-      source.request
+    R.and(
+      R.is(Function, plugin.requestPhase),
+      jsonLogicChecker.validateLogic(
+        R.prop('request', condition),
+        source.request
+      )
     ),
     await plugin.requestPhase(ctx)
   );
   await next();
   R.when(
-    jsonLogicChecker.validateLogic(
-      R.prop('response', condition),
-      source.response
+    R.and(
+      R.is(Function, plugin.responsePhase),
+      jsonLogicChecker.validateLogic(
+        R.prop('response', condition),
+        source.response
+      )
     ),
     await plugin.responsePhase(ctx)
   );
