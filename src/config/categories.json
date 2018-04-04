@@ -78,7 +78,7 @@
         },
         {
           "name": "custom",
-          "condition": "success",
+          "condition": { "response": "success" },
           "config": {
             "name": "locale_checker"
           }

@@ -3,13 +3,13 @@ const jsonLogic = require('json-logic-js');
 
 const conditionsMap = {
   success: {
-    '<=': [200, { var: 'response.status' }, 299]
+    '<=': [200, { var: 'status' }, 299]
   },
   client_error: {
-    '<=': [400, { var: 'response.status' }, 499]
+    '<=': [400, { var: 'status' }, 499]
   },
   server_error: {
-    '<=': [500, { var: 'response.status' }, 599]
+    '<=': [500, { var: 'status' }, 599]
   }
 };
 

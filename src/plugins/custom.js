@@ -1,7 +1,7 @@
 const R = require('ramda');
 
-const runCustomPlugin = R.curry(async (config, ctx, next) => {
-  const customPlugin = R.pipe(
+const pluginResolver = R.curry((config, ctx) =>
+  R.pipe(
     R.propOr({}, 'api'),
     R.pick(['name', 'version']),
     R.values,
@@ -9,8 +9,13 @@ const runCustomPlugin = R.curry(async (config, ctx, next) => {
     R.concat(['.', 'custom_plugins']),
     R.join('/'),
     require
-  )(ctx);
-  await customPlugin(ctx, next);
-});
+  )(ctx)
+);
 
-module.exports = runCustomPlugin;
+module.exports = config => {
+  const customPluginResolver = pluginResolver(config);
+  return {
+    requestPhase: ctx => customPluginResolver(ctx).requestPhase(ctx),
+    responsePhase: ctx => customPluginResolver(ctx).responsePhase(ctx)
+  };
+};

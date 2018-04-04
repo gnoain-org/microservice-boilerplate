@@ -11,14 +11,24 @@ const generatePlugin = pluginDefinition => {
 
 const runPlugin = R.curry(async (plugin, condition, ctx, next) => {
   const source = {
-    request: R.pick(['body', 'headers', 'query'], ctx.request),
+    request: R.pick(['body', 'headers', 'query'], ctx.upstream.request),
     response: R.pick(['body', 'headers', 'status'], ctx.response)
   };
-  if (jsonLogicChecker.validateLogic(condition, source)) {
-    await plugin(ctx, next);
-  } else {
-    await next();
-  }
+  R.when(
+    jsonLogicChecker.validateLogic(
+      R.prop('request', condition),
+      source.request
+    ),
+    await plugin.requestPhase(ctx)
+  );
+  await next();
+  R.when(
+    jsonLogicChecker.validateLogic(
+      R.prop('response', condition),
+      source.response
+    ),
+    await plugin.responsePhase(ctx)
+  );
 });
 
 module.exports = generatePlugin;

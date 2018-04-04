@@ -32,13 +32,13 @@ const applyTransformation = (
   }
 };
 
-let transformResponse = R.curry(async (config, ctx, next) => {
-  ctx.response = R.pipe(
-    R.propOr([], 'transformations'),
-    R.reduce(applyTransformation, ctx),
-    R.prop('response')
-  )(config);
-  await next();
+module.exports = config => ({
+  requestPhase: ctx => ctx,
+  responsePhase: ctx => {
+    ctx.response = R.pipe(
+      R.propOr([], 'transformations'),
+      R.reduce(applyTransformation, ctx),
+      R.prop('response')
+    )(config);
+  }
 });
-
-module.exports = transformResponse;

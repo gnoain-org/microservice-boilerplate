@@ -2,13 +2,12 @@ const axios = require('axios');
 const R = require('ramda');
 
 const makeRequest = R.curry(async (api, route, ctx, next) => {
-  const result = await axios({
+  let { data: body, headers, status } = await axios({
     url: ctx.upstream.request.url,
     method: ctx.upstream.request.method
   });
-  ctx.state.body = {
-    data: result.data
-  };
+  ctx.upstream.response = { body, headers, status };
+  ctx.response = R.merge(ctx.response, R.clone(ctx.upstream.response));
   await next();
 });
 
