@@ -4,14 +4,20 @@ const initializeRequest = R.curry(async (api, route, ctx, next) => {
   ctx.api = api;
   ctx.route = route;
 
-  const buildUpstreamURL = R.converge(R.concat, [
-    R.path(['api', 'upstream', 'uat']),
-    R.converge(R.pathOr, [
-      R.path(['route', 'path', 'url']),
-      R.always(['route', 'path', 'upstream']),
-      R.identity
-    ])
-  ]);
+  const buildUpstreamURL = ctx => {
+    let completeURL = R.converge(R.concat, [
+      R.path(['api', 'upstream', 'uat']),
+      R.converge(R.pathOr, [
+        R.path(['route', 'path', 'url']),
+        R.always(['route', 'path', 'upstream']),
+        R.identity
+      ])
+    ])(ctx);
+    const paramRegex = /\/:(.+)/;
+    return completeURL.replace(paramRegex, placeholder => {
+      return '/' + ctx.params[placeholder.substring(2)];
+    });
+  };
 
   ctx.upstream = R.assoc(
     'request',
@@ -26,8 +32,6 @@ const initializeRequest = R.curry(async (api, route, ctx, next) => {
 
   ctx.state.filters = [];
   await next();
-
-  ctx.body = ctx.state.body;
 });
 
 module.exports = initializeRequest;
