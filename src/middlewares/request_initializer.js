@@ -13,10 +13,10 @@ const initializeRequest = R.curry(async (api, route, ctx, next) => {
         R.identity
       ])
     ])(ctx);
-    const paramRegex = /\/:(.+)/;
-    return completeURL.replace(paramRegex, placeholder => {
-      return '/' + ctx.params[placeholder.substring(2)];
-    });
+    R.forEachObjIndexed((paramValue, paramName) => {
+      completeURL = completeURL.replace(`:${paramName}`, paramValue);
+    }, ctx.params);
+    return completeURL;
   };
 
   ctx.upstream = R.assoc(

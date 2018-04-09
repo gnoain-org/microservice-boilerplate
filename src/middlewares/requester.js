@@ -2,7 +2,6 @@ const axios = require('axios');
 const R = require('ramda');
 
 const makeRequest = R.curry(async (api, route, ctx, next) => {
-  console.log('entro al requester');
   let { data: body, headers, status } = await axios({
     url: ctx.upstream.request.url,
     method: ctx.upstream.request.method
@@ -10,10 +9,7 @@ const makeRequest = R.curry(async (api, route, ctx, next) => {
   ctx.upstream.response = { body, headers, status };
   ctx.response.body = body;
   ctx.response.status = status;
-  for (let headerName in headers) {
-    ctx.set(headerName, headers[headerName]);
-  }
-  ctx.response.body = body;
+  R.forEachObjIndexed(R.flip(R.bind(ctx.set, ctx), headers));
   await next();
 });
 
