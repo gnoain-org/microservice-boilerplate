@@ -3,58 +3,51 @@ const R = require('ramda');
 
 const jsonLogicChecker = require('../util/json_logic_checker');
 
-const applyTransformation = (
-  ctx,
-  { source, condition, operations, adaption: adaption_name }
-) => {
-  const conditionApplies = jsonLogicChecker.validateLogic(
-    condition,
-    R.path(['response'], ctx)
-  );
-  if (conditionApplies) {
-    if (adaption_name) {
-      try {
-        const adaption = R.pipe(
-          R.propOr({}, 'api'),
-          R.pick(['name', 'version']),
-          R.values,
-          R.append(adaption_name),
-          R.concat(['..', 'adaptions']),
-          R.join('/'),
-          require
-        )(ctx);
-        adaption(ctx);
-      } catch (error) {
-        throw new Error(
-          'No se ha encontrado la trasformación ' + adaption_name
-        );
-      }
-    }
-    if (R.is(Array, operations)) {
-      return R.pipe(
-        R.path(['response', source]),
-        R.reduce(jsonPatch.applyReducer, R.__, operations)
-      );
-    }
+const applyAdaption = R.curry((adaption_name, ctx) => {
+  const adaptionFilePath = R.pipe(
+    R.propOr({}, 'api'),
+    R.pick(['name', 'version']),
+    R.values,
+    R.append(adaption_name),
+    R.concat(['..', 'adaptions']),
+    R.join('/')
+  )(ctx);
+  try {
+    require(adaptionFilePath)(ctx);
+  } catch (error) {
+    throw new Error('No se ha encontrado la trasformación ' + adaption_name);
   }
-  // return R.pipe(
-  //   R.path(['response', source]),
-  //   R.call(R.reduce, jsonPatch.applyReducer, R.__, operations),
-  //   R.tap(console.log.bind(console)),
-  //   R.assocPath(['response', source], R.__, ctx),
-  //   R.when(R.always(adaption), R.call(adaption, R.__, ctx))
-  // )(ctx);
-  // } else {
-  //   return ctx;
-  // }
-};
+});
+
+const applyOperations = R.curry((source, operations, ctx) => {
+  let target = R.defaultTo({}, R.prop(source, ctx));
+  R.when(
+    R.not(jsonPatch.validate(operations, target)),
+    R.reduce(jsonPatch.applyReducer, target, operations)
+  );
+});
+
+const applyTransformation = R.curry(
+  (ctx, { source, condition, operations, adaption }) => {
+    const conditionApplies = jsonLogicChecker.validateLogic(
+      R.prop('response', condition)
+    );
+    R.when(
+      conditionApplies,
+      R.ifElse(
+        R.always(adaption),
+        applyAdaption(adaption),
+        applyOperations(source, operations)
+      )
+    )(ctx);
+  }
+);
 
 module.exports = config => ({
   requestPhase: ctx => ctx,
   responsePhase: ctx =>
     R.pipe(
       R.propOr([], 'transformations'),
-      R.reduce(applyTransformation, ctx),
-      R.prop('response')
+      R.forEach(applyTransformation(ctx))
     )(config)
 });

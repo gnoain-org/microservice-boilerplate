@@ -3,19 +3,19 @@ const jsonLogic = require('json-logic-js');
 
 const conditionsMap = {
   success: {
-    '<=': [200, { var: 'request.status' }, 299]
+    '<=': [200, { var: 'response.status' }, 299]
   },
   client_error: {
-    '<=': [400, { var: 'request.status' }, 499]
+    '<=': [400, { var: 'response.status' }, 499]
   },
   server_error: {
-    '<=': [500, { var: 'request.status' }, 599]
+    '<=': [500, { var: 'response.status' }, 599]
   }
 };
 
-const validateLogic = (condition, source) => {
+const validateLogic = R.curry((condition, source) => {
   const logic = R.propOr(R.defaultTo({}, condition), condition, conditionsMap);
   return jsonLogic.apply(logic, source);
-};
+});
 
 module.exports = { validateLogic };

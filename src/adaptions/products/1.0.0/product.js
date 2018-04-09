@@ -395,7 +395,7 @@ const adaptProduct = ctx => {
     )(R.concat(R.propOr([], 'providers', skuObject), [skuObject]));
   }, input.skus);
 
-  console.dir(output, { depth: null });
+  //console.dir(output, { depth: null });
 
   ctx.response.body = output;
 };

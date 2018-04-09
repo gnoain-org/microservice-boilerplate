@@ -57,8 +57,25 @@
           "config": {
             "transformations": [
               {
-                "condition": "success",
+                "condition": {
+                  "response": "success"
+                },
                 "adaption": "product"
+              },
+              {
+                "condition": {
+                  "response": "success"
+                },
+                "source": "body",
+                "operations": [
+                  {
+                    "op": "replace",
+                    "path": "/category_id",
+                    "value": {
+                      "text": "Me sobra el dinero!"
+                    }
+                  }
+                ]
               }
             ]
           }

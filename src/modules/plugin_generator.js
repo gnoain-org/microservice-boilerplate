@@ -15,25 +15,25 @@ const runPlugin = R.curry(async (plugin, condition, ctx, next) => {
     response: R.pick(['body', 'headers', 'status'], ctx.response)
   };
 
-  const requestCondition = jsonLogicChecker.validateLogic(
+  const requestFullfill = jsonLogicChecker.validateLogic(
     R.prop('request', condition),
-    source.request
+    source
   );
   R.when(
-    R.and(R.is(Function, plugin.requestPhase), requestCondition),
+    R.and(R.is(Function, plugin.requestPhase), requestFullfill),
     await plugin.requestPhase(ctx)
   );
 
   await next();
 
-  const responseCondition = jsonLogicChecker.validateLogic(
+  const responseFullfill = jsonLogicChecker.validateLogic(
     R.prop('response', condition),
-    source.response
+    source
   );
   R.when(
     R.and(
       R.is(Function, plugin.responsePhase),
-      R.and(requestCondition, responseCondition)
+      R.and(requestFullfill, responseFullfill)
     ),
     await plugin.responsePhase(ctx)
   );
