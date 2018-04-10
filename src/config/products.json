@@ -15,7 +15,8 @@
     {
       "method": "GET",
       "path": {
-        "url": "/product/:id"
+        "url": "/products/:id",
+        "upstream": "/product/:id"
       },
       "parameters": [
         {
