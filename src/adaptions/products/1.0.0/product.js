@@ -76,11 +76,11 @@ const adaptProduct = ctx => {
         ],
         [
           // Links with title and url
-          (R.T,
+          R.T,
           R.applySpec({
             type: R.always(resourceKey),
             links: R.of
-          }))
+          })
         ]
       ])
     )(resource);
