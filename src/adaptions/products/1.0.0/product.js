@@ -285,7 +285,7 @@ const adaptProduct = ctx => {
       components: skuObject.bundle_components
     };
 
-    variant.services = skuObject.signal_services;
+    variant.services = R.propOr([], skuObject.signal_services);
     R.map(
       R.pipe(
         R.propOr([], 'installation')
@@ -344,7 +344,7 @@ const adaptProduct = ctx => {
       ),
     R.filter(R.identity),
     R.map(renameKeys({ provider_id: 'id' })),
-    R.map(R.evolve({ id: R.toString }))
+    R.map(R.evolve({ id: R.when(R.is(Number), R.toString) }))
   )(input);
 
   // Offers
@@ -353,7 +353,7 @@ const adaptProduct = ctx => {
   const validShippingOptions = R.pipe(
     R.converge(R.concat, [
       R.propOr([], 'sts_companies'),
-      R.when(R.has('home_delivery'), R.always([{ id: '000' }]))
+      R.ifElse(R.has('home_delivery'), R.always([{ id: '000' }]), R.always([]))
     ]),
     R.pluck('id')
   );
@@ -409,10 +409,11 @@ const adaptProduct = ctx => {
         R.always(shippingOptionsByOfferId[offer.offer_id]),
         R.pipe(
           R.always(shippingOptionsByOfferId.eci),
+          R.tap(R.bind(console.log, console)),
           R.filter(eciShippingOption =>
             R.contains(
               R.prop('id', eciShippingOption),
-              validShippingOptions(sku.badges)
+              validShippingOptions(R.propOr({}, 'badges', sku))
             )
           ),
           R.when(
@@ -491,7 +492,7 @@ const adaptProduct = ctx => {
             without_stock: provider.delivery_time_without_stock,
             without_stock_date: skuObject.without_basket_date
           },
-          R.pick(availabilityBadges, skuObject.badges)
+          R.pick(availabilityBadges, R.propOr({}, skuObject.badges))
         )
       })),
       R.map(offer => {
@@ -499,8 +500,8 @@ const adaptProduct = ctx => {
           shipping_options: getShippingOptionsForOffer(offer, skuObject)
         });
       }),
-      R.map(R.filter(R.identity)),
-      R.filter(R.prop('provider_id'))
+      R.map(R.filter(R.identity))
+      // R.filter(R.prop('provider_id')) // Don't remember why this is here, but probably shouldn't
     )(R.concat(R.propOr([], 'providers', skuObject), [skuObject]));
   }, input.skus);
   ctx.response.body = output;
