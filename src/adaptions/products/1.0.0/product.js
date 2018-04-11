@@ -3,8 +3,6 @@ const R = require('ramda');
 
 const adaptProduct = ctx => {
   let input = ctx.response.body;
-  console.dir(input, { depth: null });
-
   const renameKeys = R.curry((keysMap, obj) =>
     R.reduce(
       (acc, key) => R.assoc(R.propOr(key, key, keysMap), obj[key], acc),
@@ -26,6 +24,14 @@ const adaptProduct = ctx => {
 
   const generateLinks = R.curry((resource, resourceKey) => {
     const imageSizes = ['big', 'medium', 'small', 'zoom'];
+    const gifTypes = [
+      'promo_gifs',
+      'our_best_price',
+      'special_series',
+      'internet_exclusive',
+      'eci_exclusive',
+      'seen_on_tv'
+    ];
     return R.pipe(
       R.cond([
         [
@@ -60,12 +66,21 @@ const adaptProduct = ctx => {
           })
         ],
         [
+          // Gifs
+          R.pipe(R.keys, R.intersection(gifTypes), R.length),
+          R.applySpec({
+            type: R.always('gif'),
+            name: R.pipe(R.keys, R.head),
+            links: [{ url: R.pipe(R.values, R.head) }]
+          })
+        ],
+        [
           // Links with title and url
-          R.T,
+          (R.T,
           R.applySpec({
             type: R.always(resourceKey),
             links: R.of
-          })
+          }))
         ]
       ])
     )(resource);
@@ -178,47 +193,12 @@ const adaptProduct = ctx => {
       )(promotion);
     }),
     R.map(R.reject(R.isEmpty))
+    // TODO Adapt products
   );
   output.promotions = buildPromotions(input);
 
   // Variants
   // Variants :: Media
-  const mediaResourcesMap = {
-    image_link: {
-      name: 'main_image',
-      type: 'image',
-      keyName: 'size'
-    },
-    image: {
-      name: 'image',
-      type: 'image',
-      keyName: 'size'
-    },
-    additional_image_links: {
-      name: 'additional_image',
-      type: 'image',
-      keyName: 'size'
-    },
-    look_image_links: {
-      name: 'look_image',
-      type: 'image',
-      keyName: 'size'
-    }
-  };
-
-  const transformMedia = R.curry((mediaName, mediaValue) =>
-    R.merge(R.pick(['name', 'type'], mediaResourcesMap[mediaName]), {
-      links: R.pipe(
-        R.mapObjIndexed((propertyValue, propertyKey) =>
-          R.merge(propertyValue, {
-            [mediaResourcesMap[mediaName].keyName]: propertyKey
-          })
-        ),
-        R.values
-      )(mediaValue)
-    })
-  );
-
   const buildMedia = skuObject => {
     return R.pipe(
       R.pick([
@@ -226,6 +206,7 @@ const adaptProduct = ctx => {
         'image',
         'additional_image_links',
         'look_image_links',
+        'multimedia_external_links',
         'media',
         'gifs'
       ]),
@@ -238,57 +219,6 @@ const adaptProduct = ctx => {
       R.flatten
     )(skuObject);
   };
-
-  const buildMedia2 = R.converge(R.unapply(R.reduce(R.concat, [])), [
-    // Transform images media types
-    R.pipe(
-      R.pick(R.keys(mediaResourcesMap)),
-      R.map(R.pipe(R.of, R.unnest)),
-      R.toPairs,
-      R.chain(([mediaName, mediaValues]) =>
-        R.map(transformMedia(mediaName), mediaValues)
-      )
-    ),
-
-    // Transform other media types
-    R.pipe(
-      R.propOr([], 'media'),
-      R.map(
-        R.pipe(
-          R.converge(R.assoc('links'), [
-            R.pipe(R.pick(['url']), R.of),
-            R.identity
-          ]),
-          R.omit(['url'])
-        )
-      )
-    ),
-    // Transform Gifs
-    R.pipe(
-      R.propOr({}, 'gifs'),
-      R.mapObjIndexed((gifValue, gifKey) => {
-        return R.pipe(
-          R.of,
-          R.unnest,
-          R.map(
-            R.pipe(
-              url => ({
-                name: gifKey,
-                type: 'gif',
-                links: [{ url: url }]
-              }),
-              R.evolve({
-                links: R.reject(R.propSatisfies(R.is(Boolean), 'url'))
-              }),
-              R.reject(R.isEmpty)
-            )
-          )
-        )(gifValue);
-      }),
-      R.values,
-      R.flatten
-    )
-  ]);
 
   // Variants :: Variant Keys
   const variantKeysTransformation = {
@@ -316,9 +246,54 @@ const adaptProduct = ctx => {
   };
 
   output.variants = input.skus.map(skuObject => {
-    let variant = R.pick(['sku', 'gtin'], skuObject);
+    let variant = R.pick(
+      [
+        'sku',
+        'gtin',
+        'internal_id',
+        'ean_provider',
+        'merchandising',
+        'web_model_code'
+      ],
+      skuObject
+    );
+
+    variant.cross_selling = skuObject.cross_selling; // TODO Apply product adaption
+
+    variant.attributes = R.pipe(
+      R.propOr([], 'house_hold'),
+      R.map(transformAttribute)
+    )(skuObject);
+    R.pipe(
+      R.pick(['isbn_old', 'book_binding']),
+      R.mapObjIndexed((value, key) => {
+        return {
+          name: key,
+          values: [{ value }]
+        };
+      }),
+      R.values,
+      R.concat(variant.attributes)
+    )(skuObject);
+
     variant.promotions = buildPromotions(skuObject);
+
     variant.media = buildMedia(skuObject);
+
+    variant.bundle = {
+      code: skuObject.bundle_code,
+      components: skuObject.bundle_components
+    };
+
+    variant.services = skuObject.signal_services;
+    R.map(
+      R.pipe(
+        R.propOr([], 'installation')
+        // TODO adapt products
+      ),
+      variant.services
+    );
+
     variant.variant_keys = R.map(
       variantKey =>
         R.merge(
@@ -509,6 +484,7 @@ const adaptProduct = ctx => {
             status: R.ifElse(R.equals('ADD'), R.always('available'), R.toLower)(
               skuObject.add_to_cart
             ),
+            form: skuObject.form_name,
             edition_date: skuObject.edition_date,
             unpublished_date: skuObject.unpublished_date,
             with_stock: provider.delivery_time_with_stock,
@@ -527,9 +503,6 @@ const adaptProduct = ctx => {
       R.filter(R.prop('provider_id'))
     )(R.concat(R.propOr([], 'providers', skuObject), [skuObject]));
   }, input.skus);
-
-  //console.dir(output, { depth: null });
-
   ctx.response.body = output;
 };
 
