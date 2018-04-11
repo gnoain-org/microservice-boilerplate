@@ -1,0 +1,270 @@
+{
+  "shipping": {
+    "marketplace_shippings": {
+      "marketplace_shipping_providers": [
+        {
+          "gtin": "5055288425910",
+          "providers": [
+            {
+              "provider_id": "2088",
+              "offer": {
+                "offer_id": "3803999"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "5,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "5,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            },
+            {
+              "provider_id": "2262",
+              "offer": {
+                "offer_id": "4025478"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "2,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "2,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "2,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "delivery_time_with_stock": "2018-04-13T00:00Z",
+      "delivery_time_without_stock": "2018-04-13T00:00Z"
+    }
+  },
+  "category_hierarchy": [
+    [
+      {
+        "category_name": "Tarjetas de memoria",
+        "category_id": "999.7624052013"
+      },
+      {
+        "category_name": "Tarjetas de memoria y Pen drives",
+        "category_id": "999.7624045013"
+      },
+      {
+        "category_name": "Electrónica",
+        "category_id": "999.51569013"
+      }
+    ]
+  ],
+  "marketplace_type_reference": "02",
+  "marketplace_show_offers": false,
+  "marketplace_providers_details": [
+    {
+      "business_name": "Procomp Team S.L.",
+      "cif": "B52519741",
+      "address": "C/Solidaridad N56 Bajo A",
+      "provider_id": 2262,
+      "postal_code": "33211",
+      "name": "PROCOMPONENTES",
+      "city": "GIJON"
+    },
+    {
+      "business_name": "Servicios Informáticos Pavón, S.L.",
+      "cif": "B-91222851",
+      "address": "Ctra. Tocina, 34",
+      "provider_id": 2088,
+      "postal_code": "41520",
+      "name": "Vivarek Market",
+      "city": "Sevilla"
+    }
+  ],
+  "skus": [
+    {
+      "providers": [
+        {
+          "provider_id": "2088",
+          "name": "Vivarek Market",
+          "offer": {
+            "offer_id": "3803999",
+            "price": "55,06 EUR",
+            "sale_price": "55,06 EUR",
+            "discount": 0,
+            "stock": 5,
+            "ean_provider": "5055288425910"
+          },
+          "delivery_time_with_stock": "2018-04-13T00:00Z",
+          "delivery_time_without_stock": "2018-04-13T00:00Z"
+        },
+        {
+          "provider_id": "2262",
+          "name": "PROCOMPONENTES",
+          "offer": {
+            "offer_id": "4025478",
+            "price": "61 EUR",
+            "sale_price": "61 EUR",
+            "discount": 0,
+            "stock": 5,
+            "ean_provider": "5055288425910"
+          },
+          "delivery_time_with_stock": "2018-04-13T00:00Z",
+          "delivery_time_without_stock": "2018-04-13T00:00Z"
+        }
+      ],
+      "only_marketplace_offers": true,
+      "additional_image_links": [
+        {
+          "small": {
+            "url":
+              "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_01_210x210.jpg",
+            "ratio": 1
+          },
+          "medium": {
+            "url":
+              "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_01_440x440.jpg",
+            "ratio": 1
+          },
+          "big": {
+            "url":
+              "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_01_640x640.jpg",
+            "ratio": 1
+          },
+          "zoom": {
+            "url":
+              "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_01_1000x1000.jpg",
+            "ratio": 1
+          }
+        }
+      ],
+      "image_link": {
+        "small": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_00_210x210.jpg",
+          "ratio": 1
+        },
+        "medium": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_00_440x440.jpg",
+          "ratio": 1
+        },
+        "big": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_00_640x640.jpg",
+          "ratio": 1
+        },
+        "zoom": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_00_1000x1000.jpg",
+          "ratio": 1
+        }
+      },
+      "sku": "5055288425910",
+      "gtin": "5055288425910",
+      "color": "Negro",
+      "add_to_cart": "ADD"
+    }
+  ],
+  "attribute_groups": [
+    {
+      "group": "Características principales",
+      "type": "TABLE",
+      "attributes": [
+        {
+          "name": "Tipo de producto",
+          "values": {
+            "values": [
+              {
+                "value": "MicroSDXC"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Capacidad",
+          "values": {
+            "values": [
+              {
+                "value": " 64 GB",
+                "glossary":
+                  "Unidad de medida de capacidad de almacenamiento como, por ejemplo, en una memoria interna, un discos duro o una tarjeta de memoria."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "Velocidad de lectura y escritura",
+      "type": "TABLE",
+      "attributes": [
+        {
+          "name": "Velocidad de lectura",
+          "values": {
+            "values": [
+              {
+                "value": " 90 MB/s"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "group": "warranty",
+      "type": "TABLE",
+      "attributes": [
+        {
+          "name": "warranty",
+          "values": {
+            "values": [
+              {
+                "value": "2"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "description": [
+    {
+      "title": [
+        "Integral - 64GB Micro SDXC 64GB MicroSDXC UHS Clase 10 memoria flash"
+      ]
+    }
+  ],
+  "id": "MP_0008431_INMSDX64G109045U1",
+  "group_type": "SINGLE",
+  "title": "Tarjeta de Memoria - Integral - 64GB Micro SDXC",
+  "brand": {
+    "value": "275307056",
+    "name": "INTEGRAL"
+  },
+  "category_id": "999.7624052013",
+  "store_id": "135",
+  "product_type": "52"
+}

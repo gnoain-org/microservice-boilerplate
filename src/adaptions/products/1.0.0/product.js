@@ -125,6 +125,7 @@ const adaptProduct = ctx => {
 
   // Attribute groups
   output.attribute_groups = R.pipe(
+    R.propOr([], 'attribute_groups'),
     R.reduce(
       (acc, attribute_group) => {
         acc.currentGroup = R.propOr(
@@ -160,7 +161,7 @@ const adaptProduct = ctx => {
       }, R.propOr([], 'attributes', group));
       return group;
     })
-  )(input.attribute_groups);
+  )(input);
 
   // Promotions
   const buildPromotions = R.pipe(
@@ -492,7 +493,7 @@ const adaptProduct = ctx => {
             without_stock: provider.delivery_time_without_stock,
             without_stock_date: skuObject.without_basket_date
           },
-          R.pick(availabilityBadges, R.propOr({}, skuObject.badges))
+          R.pick(availabilityBadges, R.propOr({}, 'badges', skuObject))
         )
       })),
       R.map(offer => {

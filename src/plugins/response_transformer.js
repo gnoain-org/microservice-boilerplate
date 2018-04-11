@@ -15,7 +15,7 @@ const applyAdaption = R.curry((adaption_name, ctx) => {
   try {
     require(adaptionFilePath)(ctx);
   } catch (error) {
-    throw new Error('No se ha encontrado la trasformación ' + adaption_name);
+    throw console.log('Fallo al aplicar la transformación ' + adaption_name);
   }
 });
 

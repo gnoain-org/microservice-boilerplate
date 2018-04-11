@@ -62,21 +62,63 @@
                   "response": "success"
                 },
                 "adaption": "product"
-              },
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": {
+        "url": "/products",
+        "upstream":
+          "/products?size=1&categoryId=999.7624052013&dimensions=4284559175,108254"
+      },
+      "parameters": [
+        {
+          "name": "include",
+          "values": []
+        },
+        {
+          "name": "expand",
+          "values": []
+        }
+      ],
+      "query": [
+        {
+          "name": "expand",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": []
+            }
+          }
+        },
+        {
+          "name": "include",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": []
+            }
+          }
+        }
+      ],
+      "plugins": [
+        {
+          "name": "response_transformer",
+          "config": {
+            "transformations": [
               {
                 "condition": {
                   "response": "success"
                 },
-                "source": "body",
-                "operations": [
-                  {
-                    "op": "replace",
-                    "path": "/category_id",
-                    "value": {
-                      "text": "Me sobra el dinero!"
-                    }
-                  }
-                ]
+                "adaption": "product_list"
               }
             ]
           }

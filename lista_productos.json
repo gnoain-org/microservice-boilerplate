@@ -1,0 +1,138 @@
+{
+  "dimensions": [
+    {
+      "values": [
+        {
+          "id": "4284559202",
+          "trail": "4284559175,108254,4284559202",
+          "text": "MicroSDHC",
+          "count": 1,
+          "selected": false
+        },
+        {
+          "id": "4284559175",
+          "trail": "108254",
+          "text": "MicroSDXC",
+          "count": 1,
+          "selected": true
+        }
+      ],
+      "multiselect": true,
+      "id": "116536",
+      "text": "Tipo de tarjeta memoria"
+    },
+    {
+      "values": [
+        {
+          "id": "108254",
+          "trail": "4284559175",
+          "text": "INTEGRAL",
+          "count": 1,
+          "selected": true
+        },
+        {
+          "id": "108737",
+          "trail": "4284559175,108254,108737",
+          "text": "KINGSTON",
+          "count": 5,
+          "selected": false
+        },
+        {
+          "id": "111473",
+          "trail": "4284559175,108254,111473",
+          "text": "PNY",
+          "count": 1,
+          "selected": false
+        },
+        {
+          "id": "112395",
+          "trail": "4284559175,108254,112395",
+          "text": "Samsung",
+          "count": 2,
+          "selected": false
+        },
+        {
+          "id": "112414",
+          "trail": "4284559175,108254,112414",
+          "text": "SanDisk",
+          "count": 6,
+          "selected": false
+        },
+        {
+          "id": "113607",
+          "trail": "4284559175,108254,113607",
+          "text": "Toshiba",
+          "count": 1,
+          "selected": false
+        },
+        {
+          "id": "200416",
+          "trail": "4284559175,108254,200416",
+          "text": "V7",
+          "count": 1,
+          "selected": false
+        },
+        {
+          "id": "114140",
+          "trail": "4284559175,108254,114140",
+          "text": "Verbatim",
+          "count": 1,
+          "selected": false
+        }
+      ],
+      "multiselect": true,
+      "id": "102250",
+      "text": "Marca"
+    }
+  ],
+  "selected_sort": "bestSellerQtyDesc",
+  "products": [
+    {
+      "providers": 2,
+      "marketplace_type_reference": "02",
+      "marketplace_show_offers": false,
+      "skus": [
+        {
+          "marketplace_info": {
+            "min_price": "55,06 EUR",
+            "sec_min_price": "61 EUR",
+            "min_offer_provider": "Vivarek Market",
+            "providers": 2,
+            "min_origin_price": "55,06 EUR",
+            "sec_min_origin_price": "61 EUR",
+            "offer_id": "4025478"
+          },
+          "only_marketplace_offers": true,
+          "sku": "5055288425910",
+          "gtin": "5055288425910",
+          "color": "Negro",
+          "image_color": {
+            "title": "Negro"
+          },
+          "image": {
+            "url":
+              "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/505/528/842/5055288425910_00_440x440.jpg",
+            "ratio": 1
+          },
+          "add_to_cart": "ADD"
+        }
+      ],
+      "id": "MP_0008431_INMSDX64G109045U1",
+      "group_type": "SINGLE",
+      "title": "Tarjeta de Memoria - Integral - 64GB Micro SDXC",
+      "brand": {
+        "value": "275307056",
+        "name": "INTEGRAL"
+      },
+      "searchable": true,
+      "category_id": "999.7624052013",
+      "store_id": "135"
+    }
+  ],
+  "pagination": {
+    "offset": 0,
+    "size": 1,
+    "count": 1
+  },
+  "locales": ["es_ES"]
+}
