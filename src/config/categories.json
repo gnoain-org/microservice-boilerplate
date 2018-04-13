@@ -98,6 +98,93 @@
           }
         }
       ]
+    },
+    {
+      "method": "GET",
+      "path": {
+        "url": "/category/:id"
+      },
+      "parameters": [
+        {
+          "name": "include",
+          "values": ["locales", "children", "children.locales"]
+        },
+        {
+          "name": "expand",
+          "values": ["locales", "children", "children.locales", "name_locales"]
+        }
+      ],
+      "query": [
+        {
+          "name": "expand",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["locales"]
+            }
+          }
+        },
+        {
+          "name": "include",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["locales"]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z]{2}_[A-Z]{2}$"
+            }
+          }
+        },
+        {
+          "name": "postal_code",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "plugins": [
+        {
+          "name": "custom",
+          "config": {
+            "name": "postal_code_filter"
+          }
+        },
+        {
+          "name": "response_transformer",
+          "config": {
+            "transformations": [
+              {
+                "source": "body",
+                "condition": "success",
+                "adaption": "category"
+              }
+            ]
+          }
+        },
+        {
+          "name": "custom",
+          "condition": {
+            "response": "success"
+          },
+          "config": {
+            "name": "locale_checker"
+          }
+        }
+      ]
     }
   ]
 }

@@ -7,11 +7,30 @@ const cleanObject = filterDeepByRecursive(value =>
 
 const adaptProductList = ctx => {
   const input = ctx.response.body;
-  let output = R.merge(
-    {},
-    R.pick(['dimensions', 'selected_sort', 'pagination', 'locales'], input)
+  let output = {};
+
+  output.search = R.pick(
+    ['did_you_mean', 'spell_correction', 'url_to_redirect'],
+    input
   );
-  output.products = R.map(product => {
+
+  const [categories, dimensions] = R.partition(
+    R.pipe(R.prop('id'), R.equals('100972'))
+  )(R.prop('dimensions', input));
+
+  output.pagination = R.prop('pagination', input);
+  output.sort = R.prop('selected_sort', input);
+
+  output.data_context = R.applySpec({
+    categories: R.always(categories),
+    dimensions: R.always(dimensions),
+    allAvailable: R.prop('available_add_to_cart_all'),
+    eciExpressCentreID: R.prop('eci_express_centre_id'),
+    xmasBasketBudget: R.prop('basket_budget'),
+    otherCategoriesResults: R.prop('results_other_categories')
+  })(input);
+
+  output.data = R.map(product => {
     let fakeContextualizedProduct = R.assocPath(
       ['response', 'body'],
       product,
@@ -24,8 +43,8 @@ const adaptProductList = ctx => {
       fakeContextualizedProduct
     );
 
-    let marketplaceOffers = R.chain(sku => {
-      return R.when(
+    const marketplaceOffers = R.chain(
+      R.ifElse(
         R.prop('marketplace_info'),
         R.applySpec([
           {
@@ -49,13 +68,33 @@ const adaptProductList = ctx => {
               discount: R.path(['marketplace_info', 'sec_min_discount'])
             }
           }
-        ])
-      )(sku);
-    }, product.skus);
+        ]),
+        R.always(undefined)
+      ),
+      product.skus
+    );
 
-    adaptedProduct.offers = R.concat(
-      R.propOr([], 'offers', marketplaceOffers),
-      cleanObject(marketplaceOffers)
+    const marketplaceProviders = R.chain(
+      R.ifElse(
+        R.prop('marketplace_info'),
+        R.applySpec({
+          name: R.path(['marketplace_info', 'min_offer_provider'])
+        }),
+        R.always(undefined)
+      ),
+      product.skus
+    );
+
+    adaptedProduct.offers = R.filter(
+      R.path(['pricing', 'price']),
+      R.concat(
+        R.propOr([], 'offers', adaptedProduct),
+        cleanObject(marketplaceOffers)
+      )
+    );
+    adaptedProduct.providers = R.concat(
+      R.propOr([], 'providers', adaptedProduct),
+      cleanObject(marketplaceProviders)
     );
 
     return adaptedProduct;

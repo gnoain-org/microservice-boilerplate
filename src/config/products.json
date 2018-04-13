@@ -72,8 +72,7 @@
       "method": "GET",
       "path": {
         "url": "/products",
-        "upstream":
-          "/products?size=1&categoryId=999.7624052013&dimensions=4284559175,108254"
+        "upstream": "/products?size=2&categoryId=997.24114694011"
       },
       "parameters": [
         {
