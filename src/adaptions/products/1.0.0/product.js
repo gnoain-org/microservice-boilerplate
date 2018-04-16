@@ -1,8 +1,9 @@
 const _ = require('lodash');
 const R = require('ramda');
 
-const adaptProduct = ctx => {
-  let input = ctx.response.body;
+const transformProduct = inputProduct => {
+  let input = inputProduct;
+
   const renameKeys = R.curry((keysMap, obj) =>
     R.reduce(
       (acc, key) => R.assoc(R.propOr(key, key, keysMap), obj[key], acc),
@@ -123,7 +124,49 @@ const adaptProduct = ctx => {
     R.propOr(null, 'sku')
   )(input.skus);
 
+  //Recursive product adaption
+
+  input.collection_skus = R.when(
+    R.complement(R.isNil),
+    R.map(transformProduct)
+  )(input.collection_skus);
+  input.range = R.when(
+    R.pipe(R.prop('products'), R.complement(R.isNil)),
+    R.pipe(
+      R.prop('products'),
+      R.map(transformProduct),
+      R.assoc('products', input.range)
+    )
+  )(R.path(['range'], input));
+  input.cross_selling = R.when(R.complement(R.isNil), R.map(transformProduct))(
+    input.cross_selling
+  );
+  input.parent_collection = R.when(
+    R.complement(R.isNil),
+    R.map(transformProduct)
+  )(input.parent_collection);
+
   // Attribute groups
+
+  const createAttributeGroupFromProps = (name, attributesPaths, origin) => {
+    let group = {
+      group: name,
+      attributes: R.map(
+        R.applySpec({
+          name: R.last,
+          values: R.pipe(R.path(R.__, origin), R.of)
+        }),
+        attributesPaths
+      )
+    };
+    group.attributes = R.filter(
+      R.pipe(R.prop('values'), R.head, R.isNil, R.not),
+      group.attributes
+    );
+
+    return R.isEmpty(group.attributes) ? undefined : group;
+  };
+
   output.attribute_groups = R.pipe(
     R.propOr([], 'attribute_groups'),
     R.reduce(
@@ -163,16 +206,50 @@ const adaptProduct = ctx => {
     })
   )(input);
 
+  const attributesConfig = [
+    ['food_attributes', [['food_sale_info'], ['food_information']]],
+    [
+      'related_products',
+      [['collection_skus'], ['range'], ['cross_selling'], ['parent_collection']]
+    ],
+    ['payment_options', [['financed_info']]],
+    [
+      'product_info',
+      [
+        ['title'],
+        ['description'],
+        ['short_description'],
+        ['product_type'],
+        ['pack_composition']
+      ]
+    ],
+    [
+      'variants_info',
+      [
+        ['authors'],
+        ['artists'],
+        ['directors'],
+        ['actors'],
+        ['year'],
+        ['variants']
+      ]
+    ]
+  ];
+
+  output.attribute_groups = R.filter(
+    R.complement(R.isNil),
+    R.concat(
+      output.attribute_groups,
+      R.map(
+        R.apply(R.partialRight(createAttributeGroupFromProps, [input])),
+        attributesConfig
+      )
+    )
+  );
+
   // Promotions
-  const buildPromotions = R.pipe(
-    R.pick([
-      'promos',
-      'informativa_promotions',
-      'coste_promotions',
-      'gift_promotions'
-    ]),
-    R.values,
-    R.flatten,
+
+  const processPromotions = R.pipe(
     R.map(promotion => {
       // Build Links
       return R.pipe(
@@ -193,8 +270,27 @@ const adaptProduct = ctx => {
         R.omit(['image_url', 'image', 'image_links'])
       )(promotion);
     }),
+    R.map(promotion => {
+      // Adapt products
+      promotion.products = R.when(
+        R.complement(R.isNil),
+        R.map(transformProduct)
+      )(promotion.products);
+      return promotion;
+    }),
     R.map(R.reject(R.isEmpty))
-    // TODO Adapt products
+  );
+
+  const buildPromotions = R.pipe(
+    R.pick([
+      'promos',
+      'informativa_promotions',
+      'coste_promotions',
+      'gift_promotions'
+    ]),
+    R.values,
+    R.flatten,
+    processPromotions
   );
   output.promotions = buildPromotions(input);
 
@@ -258,8 +354,10 @@ const adaptProduct = ctx => {
       ],
       skuObject
     );
-
-    variant.cross_selling = skuObject.cross_selling; // TODO Apply product adaption
+    variant.cross_selling = R.when(
+      R.complement(R.isNil),
+      R.map(transformProduct)
+    )(skuObject.cross_selling);
 
     variant.attributes = R.pipe(
       R.propOr([], 'house_hold'),
@@ -288,10 +386,7 @@ const adaptProduct = ctx => {
 
     variant.services = R.propOr([], skuObject.signal_services);
     R.map(
-      R.pipe(
-        R.propOr([], 'installation')
-        // TODO adapt products
-      ),
+      R.pipe(R.propOr([], 'installation'), R.of, processPromotions, R.head),
       variant.services
     );
 
@@ -505,7 +600,11 @@ const adaptProduct = ctx => {
       // R.filter(R.prop('provider_id')) // Don't remember why this is here, but probably shouldn't
     )(R.concat(R.propOr([], 'providers', skuObject), [skuObject]));
   }, input.skus);
-  ctx.response.body = output;
+  return output;
+};
+
+const adaptProduct = ctx => {
+  ctx.response.body = transformProduct(ctx.response.body);
 };
 
 module.exports = adaptProduct;
