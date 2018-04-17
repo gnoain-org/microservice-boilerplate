@@ -384,10 +384,9 @@ const transformProduct = inputProduct => {
       components: skuObject.bundle_components
     };
 
-    variant.services = R.propOr([], skuObject.signal_services);
-    R.map(
-      R.pipe(R.propOr([], 'installation'), R.of, processPromotions, R.head),
-      variant.services
+    variant.services = R.map(
+      R.evolve({ installation: R.pipe(R.of, processPromotions) }),
+      R.propOr([], skuObject.signal_services)
     );
 
     variant.variant_keys = R.map(
@@ -419,6 +418,13 @@ const transformProduct = inputProduct => {
 
     return R.reject(R.isEmpty, variant);
   });
+
+  // Signal services
+
+  output.services = R.map(
+    R.evolve({ installation: R.pipe(R.of, processPromotions) }),
+    R.propOr([], input.signal_services)
+  );
 
   // Providers
   const providersMap = {
