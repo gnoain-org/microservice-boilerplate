@@ -1,0 +1,215 @@
+{
+  "category_id": "999.6810209013",
+  "category_hierarchy": [
+    [
+      {
+        "category_name": "Varios",
+        "category_id": "999.6810209013"
+      },
+      {
+        "category_name": "Libros",
+        "category_id": "999.54302013"
+      }
+    ]
+  ],
+  "group_type": "SINGLE",
+  "id": "MP_0008552_9788491480525",
+  "product_type": "70",
+  "store_id": "135",
+  "title":
+    "Responsabilidad social corporativa. El papel de las Naciones Unidas y otras organizaciones internacionales en la promoción de la RSC",
+  "brand": {
+    "id": "892990056",
+    "name": "DYKINSON"
+  },
+  "descriptions": [
+    {
+      "value": [
+        "Responsabilidad social corporativa. El papel de las Naciones Unidas y otras organizaciones internacionales en la promoción de la RSC"
+      ],
+      "title": ["Sinopsis"]
+    }
+  ],
+  "default_provider": null,
+  "default_variant": null,
+  "attribute_groups": [
+    {
+      "group": null,
+      "attributes": [
+        {
+          "name": "Idioma: ",
+          "values": [
+            {
+              "text": "Español"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "group": "product_info",
+      "attributes": [
+        {
+          "name": "title",
+          "values": [
+            "Responsabilidad social corporativa. El papel de las Naciones Unidas y otras organizaciones internacionales en la promoción de la RSC"
+          ]
+        },
+        {
+          "name": "description",
+          "values": [
+            [
+              {
+                "value": [
+                  "Responsabilidad social corporativa. El papel de las Naciones Unidas y otras organizaciones internacionales en la promoción de la RSC"
+                ],
+                "title": ["Sinopsis"]
+              }
+            ]
+          ]
+        },
+        {
+          "name": "product_type",
+          "values": ["70"]
+        }
+      ]
+    }
+  ],
+  "promotions": [],
+  "variants": [
+    {
+      "sku": "9788491480525",
+      "gtin": "9788491480525",
+      "media": [
+        {
+          "name": "image_link",
+          "type": "image",
+          "links": [
+            {
+              "url":
+                "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_640x640.jpg",
+              "ratio": 1,
+              "size": "big"
+            },
+            {
+              "url":
+                "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_440x440.jpg",
+              "ratio": 1,
+              "size": "medium"
+            },
+            {
+              "url":
+                "//sgfm.elcorteingles.es/SGFM/dctm/MARKET/978/849/148/9788491480525_00_210x210.jpg",
+              "ratio": 1,
+              "size": "small"
+            }
+          ]
+        }
+      ],
+      "bundle": {},
+      "other_providers_treatment": "show_always"
+    }
+  ],
+  "services": [],
+  "providers": [
+    {
+      "business_name": "AGAPEA FACTORY S.A.",
+      "cif": "A92508720",
+      "address": "C/ Bodegueros 43",
+      "id": "2107",
+      "postal_code": "29006",
+      "name": "AG Libros",
+      "city": "Málaga"
+    },
+    {
+      "business_name": "SERLOGAL 2.0 S.L.",
+      "cif": "B-94062411",
+      "address": "O Castelo, 33",
+      "id": "2094",
+      "postal_code": "36156",
+      "name": "IMOSVER",
+      "city": "Lerez (Pontevedra)"
+    }
+  ],
+  "offers": [
+    {
+      "offer_id": "5229503",
+      "provider_id": "2107",
+      "variant": {
+        "sku": "9788491480525"
+      },
+      "pricing": {
+        "price": "20 EUR",
+        "sale_price": "19 EUR",
+        "discount": 5
+      },
+      "availability": {
+        "status": "available",
+        "edition_date": "2016-12-27T00:00Z",
+        "with_stock": "2018-04-27T00:00Z",
+        "without_stock": "2018-04-27T00:00Z"
+      },
+      "shipping_options": [
+        {
+          "id": "000",
+          "name": "domicilio",
+          "prices": [
+            {
+              "title": "Menorca, Ibiza y Formentera",
+              "shipping_price": 3.9
+            },
+            {
+              "title": "España peninsular, Mallorca",
+              "shipping_price": 3.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "offer_id": "4386078",
+      "provider_id": "2094",
+      "variant": {
+        "sku": "9788491480525"
+      },
+      "pricing": {
+        "price": "20 EUR",
+        "sale_price": "19 EUR",
+        "discount": 5
+      },
+      "availability": {
+        "status": "available",
+        "edition_date": "2016-12-27T00:00Z",
+        "with_stock": "2018-04-20T00:00Z",
+        "without_stock": "2018-04-20T00:00Z"
+      },
+      "shipping_options": [
+        {
+          "id": "000",
+          "name": "domicilio",
+          "prices": [
+            {
+              "title": "España peninsular, Mallorca",
+              "shipping_price": 3.9
+            },
+            {
+              "title": "Menorca, Ibiza y Formentera",
+              "shipping_price": 3.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "variant": {
+        "sku": "9788491480525"
+      },
+      "pricing": {},
+      "availability": {
+        "status": "available",
+        "edition_date": "2016-12-27T00:00Z"
+      },
+      "shipping_options": []
+    }
+  ]
+}

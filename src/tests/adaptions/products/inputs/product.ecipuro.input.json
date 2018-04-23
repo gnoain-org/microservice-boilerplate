@@ -1,0 +1,752 @@
+{
+  "shipping": {
+    "marketplace_shippings": {
+      "marketplace_shipping_providers": [
+        {
+          "gtin": "001006510827725   ",
+          "providers": [
+            {
+              "provider_id": "2094",
+              "offer": {
+                "offer_id": "5715444"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            },
+            {
+              "provider_id": "2121",
+              "offer": {
+                "offer_id": "6005303"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            },
+            {
+              "provider_id": "2092",
+              "offer": {
+                "offer_id": "5963033"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            },
+            {
+              "provider_id": "2162",
+              "offer": {
+                "offer_id": "5706089"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            },
+            {
+              "provider_id": "2114",
+              "offer": {
+                "offer_id": "5704242"
+              },
+              "available": [
+                {
+                  "title": "Domicilio",
+                  "locations": [
+                    {
+                      "title": "España peninsular, Mallorca",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    },
+                    {
+                      "title": "Menorca, Ibiza y Formentera",
+                      "shipping": "3,90 EUR",
+                      "express_checkout": false
+                    }
+                  ],
+                  "id": "000"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "delivery_time_with_stock": "2018-04-25T00:00Z",
+      "delivery_time_without_stock": "2018-04-25T00:00Z"
+    },
+    "delivery_time_with_stock": "2018-04-20T00:00Z",
+    "delivery_time_without_stock": "2018-05-04T00:00Z",
+    "available": [
+      {
+        "title": "SUPERCOR",
+        "locations": [
+          {
+            "title": "España peninsular, Mallorca, Menorca, Ibiza y Formentera",
+            "shipping": "1 EUR",
+            "express_checkout": false,
+            "priority": 1
+          },
+          {
+            "title":
+              "Canarias (Tenerife y Gran Canaria), Portugal - Islas (Azores y Madeira), Unión Europea",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 3
+          },
+          {
+            "title":
+              "Canarias (Lanzarote, Fuerteventura, La Palma, Hierro, Gomera)",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 4
+          },
+          {
+            "title": "Ceuta y Melilla, América",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 5
+          },
+          {
+            "title": "Portugal",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 6
+          },
+          {
+            "title": "Resto Europa, África, Asia, Oceanía",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 9
+          }
+        ],
+        "id": "002"
+      },
+      {
+        "title": "Domicilio",
+        "locations": [
+          {
+            "title": "España peninsular, Mallorca, Menorca, Ibiza y Formentera",
+            "shipping": "5,90 EUR",
+            "express_checkout": false,
+            "priority": 1
+          },
+          {
+            "title":
+              "Canarias (Tenerife y Gran Canaria), Portugal - Islas (Azores y Madeira), Unión Europea",
+            "shipping": "5,90 EUR",
+            "express_checkout": false,
+            "priority": 3
+          },
+          {
+            "title":
+              "Canarias (Lanzarote, Fuerteventura, La Palma, Hierro, Gomera)",
+            "shipping": "9,80 EUR",
+            "express_checkout": false,
+            "priority": 4
+          },
+          {
+            "title": "Ceuta y Melilla, América",
+            "shipping": "20 EUR",
+            "express_checkout": false,
+            "priority": 5
+          },
+          {
+            "title": "Portugal",
+            "shipping": "3,90 EUR",
+            "express_checkout": false,
+            "priority": 6
+          },
+          {
+            "title": "Resto Europa, África, Asia, Oceanía",
+            "shipping": "15 EUR",
+            "express_checkout": false,
+            "priority": 9
+          },
+          {
+            "title": "España peninsular, Mallorca-Entrega en 2 horas",
+            "shipping": "7,90 EUR",
+            "express_checkout": true
+          },
+          {
+            "title": "Canarias (Tenerife y Gran Canaria)-Entrega en 2 horas",
+            "shipping": "7,90 EUR",
+            "express_checkout": true
+          }
+        ],
+        "id": "000"
+      },
+      {
+        "title": "CORREOS",
+        "locations": [
+          {
+            "title": "España peninsular, Mallorca, Menorca, Ibiza y Formentera",
+            "shipping": "2 EUR",
+            "express_checkout": false,
+            "priority": 1
+          },
+          {
+            "title":
+              "Canarias (Tenerife y Gran Canaria), Portugal - Islas (Azores y Madeira), Unión Europea",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 3
+          },
+          {
+            "title":
+              "Canarias (Lanzarote, Fuerteventura, La Palma, Hierro, Gomera)",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 4
+          },
+          {
+            "title": "Ceuta y Melilla, América",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 5
+          },
+          {
+            "title": "Portugal",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 6
+          },
+          {
+            "title": "Resto Europa, África, Asia, Oceanía",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 9
+          }
+        ],
+        "id": "004"
+      },
+      {
+        "title": "CELERITAS",
+        "locations": [
+          {
+            "title": "España peninsular, Mallorca, Menorca, Ibiza y Formentera",
+            "shipping": "2 EUR",
+            "express_checkout": false,
+            "priority": 1
+          },
+          {
+            "title":
+              "Canarias (Tenerife y Gran Canaria), Portugal - Islas (Azores y Madeira), Unión Europea",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 3
+          },
+          {
+            "title":
+              "Canarias (Lanzarote, Fuerteventura, La Palma, Hierro, Gomera)",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 4
+          },
+          {
+            "title": "Ceuta y Melilla, América",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 5
+          },
+          {
+            "title": "Portugal",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 6
+          },
+          {
+            "title": "Resto Europa, África, Asia, Oceanía",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 9
+          }
+        ],
+        "id": "006"
+      },
+      {
+        "title": "Opencor",
+        "locations": [
+          {
+            "title": "España peninsular, Mallorca, Menorca, Ibiza y Formentera",
+            "shipping": "1 EUR",
+            "express_checkout": false,
+            "priority": 1
+          },
+          {
+            "title":
+              "Canarias (Tenerife y Gran Canaria), Portugal - Islas (Azores y Madeira), Unión Europea",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 3
+          },
+          {
+            "title":
+              "Canarias (Lanzarote, Fuerteventura, La Palma, Hierro, Gomera)",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 4
+          },
+          {
+            "title": "Ceuta y Melilla, América",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 5
+          },
+          {
+            "title": "Portugal",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 6
+          },
+          {
+            "title": "Resto Europa, África, Asia, Oceanía",
+            "shipping": "-",
+            "express_checkout": false,
+            "priority": 9
+          }
+        ],
+        "id": "001"
+      }
+    ],
+    "excluded": [
+      "NIGER",
+      "ARGENTINA",
+      "YEMEN",
+      "IRAN",
+      "BIELORRUSIA",
+      "MALI",
+      "LIBANO",
+      "SIRIA",
+      "COREA DEL NORTE",
+      "BURUNDI",
+      "LIBIA",
+      "CUBA",
+      "ZIMBABWE",
+      "SUDAN",
+      "RUSIA",
+      "AFGANISTAN",
+      "MYANMAR",
+      "VENEZUELA"
+    ],
+    "shipping_return": {
+      "shopping_center": [
+        {
+          "description":
+            "Librería: Dispone de 15 días desde la entrega, con la mercancía sin utilizar."
+        }
+      ]
+    }
+  },
+  "category_hierarchy": [
+    [
+      {
+        "category_name": "Manualidades por Material",
+        "category_id": "999.6866222013"
+      },
+      {
+        "category_name": "Ocio y Estilo de vida",
+        "category_id": "999.54339013"
+      },
+      {
+        "category_name": "Libros",
+        "category_id": "999.54302013"
+      }
+    ],
+    [
+      {
+        "category_name": "Libros Selección títulos Ocio",
+        "category_id": "997.18583963011"
+      }
+    ],
+    [
+      {
+        "category_name": "Libros Especial Moda y costura",
+        "category_id": "997.24737090011"
+      }
+    ],
+    [
+      {
+        "category_name": "Libros",
+        "category_id": "997.18451053011"
+      },
+      {
+        "category_name": "Día de la Madre",
+        "category_id": "997.341009011"
+      }
+    ]
+  ],
+  "marketplace_type_reference": "02",
+  "marketplace_show_offers": true,
+  "marketplace_providers_details": [
+    {
+      "business_name": "POPULAR LIBROS S.L.",
+      "cif": "B02280535",
+      "address": "OCTACVIO CUARTERO, 17",
+      "provider_id": 2162,
+      "postal_code": "02003",
+      "name": "POPULAR LIBROS",
+      "city": "ALBACETE"
+    },
+    {
+      "business_name": "Cervantes Bookshop, S.L.",
+      "cif": "B74121567",
+      "address": "Cr. Casal Nº 9",
+      "provider_id": 2114,
+      "postal_code": "33001",
+      "name": "LIBRERÍA CERVANTES",
+      "city": "Oviedo"
+    },
+    {
+      "business_name": "SERLOGAL 2.0 S.L.",
+      "cif": "B-94062411",
+      "address": "O Castelo, 33",
+      "provider_id": 2094,
+      "postal_code": "36156",
+      "name": "IMOSVER",
+      "city": "Lerez (Pontevedra)"
+    },
+    {
+      "business_name": "Libros como Luces SL",
+      "cif": "B92391341",
+      "address": "Alameda Principal, 16",
+      "provider_id": 2121,
+      "postal_code": "29005",
+      "name": "LIBRERÍA LUCES",
+      "city": "Málaga"
+    },
+    {
+      "business_name": "AGAPEA FACTORY S.A.",
+      "cif": "A92508720",
+      "address": "C/ Bodegueros 43",
+      "provider_id": 2092,
+      "postal_code": "29006",
+      "name": "AGAPEA",
+      "city": "Málaga"
+    }
+  ],
+  "skus": [
+    {
+      "providers": [
+        {
+          "provider_id": "2092",
+          "name": "AGAPEA",
+          "offer": {
+            "offer_id": "5963033",
+            "price": "21,90 EUR",
+            "sale_price": "20,80 EUR",
+            "discount": 5,
+            "stock": 16,
+            "ean_provider": "9788499986418"
+          },
+          "delivery_time_with_stock": "2018-04-20T00:00Z",
+          "delivery_time_without_stock": "2018-04-20T00:00Z"
+        },
+        {
+          "provider_id": "2094",
+          "name": "IMOSVER",
+          "offer": {
+            "offer_id": "5715444",
+            "price": "21,90 EUR",
+            "sale_price": "20,81 EUR",
+            "discount": 5,
+            "stock": 2,
+            "ean_provider": "9788499986418"
+          },
+          "delivery_time_with_stock": "2018-04-20T00:00Z",
+          "delivery_time_without_stock": "2018-04-20T00:00Z"
+        },
+        {
+          "provider_id": "2121",
+          "name": "LIBRERÍA LUCES",
+          "offer": {
+            "offer_id": "6005303",
+            "price": "21,90 EUR",
+            "sale_price": "21,90 EUR",
+            "discount": 0,
+            "stock": 2,
+            "ean_provider": "9788499986418"
+          },
+          "delivery_time_with_stock": "2018-04-25T00:00Z",
+          "delivery_time_without_stock": "2018-04-25T00:00Z"
+        },
+        {
+          "provider_id": "2162",
+          "name": "POPULAR LIBROS",
+          "offer": {
+            "offer_id": "5706089",
+            "price": "21,90 EUR",
+            "sale_price": "21,90 EUR",
+            "discount": 0,
+            "stock": 18,
+            "ean_provider": "9788499986418"
+          },
+          "delivery_time_with_stock": "2018-04-25T00:00Z",
+          "delivery_time_without_stock": "2018-04-25T00:00Z"
+        },
+        {
+          "provider_id": "2114",
+          "name": "LIBRERÍA CERVANTES",
+          "offer": {
+            "offer_id": "5704242",
+            "price": "21,90 EUR",
+            "sale_price": "21,90 EUR",
+            "discount": 0,
+            "stock": 19,
+            "ean_provider": "9788499986418"
+          },
+          "delivery_time_with_stock": "2018-04-25T00:00Z",
+          "delivery_time_without_stock": "2018-04-25T00:00Z"
+        }
+      ],
+      "only_marketplace_offers": false,
+      "image_link": {
+        "small": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201712/20/00106510827725____1__210x210.jpg",
+          "ratio": 1
+        },
+        "medium": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201712/20/00106510827725____1__440x440.jpg",
+          "ratio": 1
+        },
+        "big": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201712/20/00106510827725____1__640x640.jpg",
+          "ratio": 1
+        },
+        "zoom": {
+          "url":
+            "//sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201712/20/00106510827725____1__1200x1200.jpg",
+          "ratio": 1
+        }
+      },
+      "informativa_promotions": [
+        {
+          "id": "promo391174392347",
+          "name": "INF Gastos envío gratis Libros +19€",
+          "corporativa": true,
+          "exclusive": false,
+          "title": "Envío GRATIS a España en Libros",
+          "priority": 80,
+          "start_date": "2016-01-15T00:00Z",
+          "end_date": "2099-12-31T23:59Z",
+          "promotion_type": "informativa",
+          "description":
+            "Excepto Entrega en 2 horas o a la hora que tú quieras. Solo para libros vendidos por El Corte Inglés."
+        },
+        {
+          "id": "promo391176702353",
+          "name":
+            "5% de descuento en todos nuestros libros en papel. Válido sólo para libros vendidos directamente por El Corte Inglés (copia 2)",
+          "corporativa": true,
+          "exclusive": false,
+          "title":
+            "5% de descuento en todos  nuestros títulos en papel, excepto libros de texto. Exclusivo online. ",
+          "priority": 19,
+          "start_date": "2017-04-24T00:00Z",
+          "end_date": "2099-12-31T23:59Z",
+          "promotion_type": "informativa",
+          "description":
+            " Válido solo para libros vendidos directamente por El Corte Inglés"
+        }
+      ],
+      "internal_id": "22120744001",
+      "sku": "001006510827725   ",
+      "gtin": "9788499986418",
+      "price": "21,90 EUR",
+      "edition_date": "2018-01-16T00:00Z",
+      "sale_price": "20,80 EUR",
+      "discount": 5,
+      "badges": {
+        "home_delivery": true,
+        "eci_pick_up": true,
+        "sts_pick_up": true,
+        "sts_companies": [
+          {
+            "name": "CELERITAS",
+            "id": "006"
+          },
+          {
+            "name": "SUPERCOR, S.A.",
+            "id": "002"
+          },
+          {
+            "name": "CORREOS",
+            "id": "004"
+          }
+        ],
+        "express_delivery": true
+      },
+      "add_to_cart": "ADD",
+      "delivery_time_with_stock": "2018-04-20T00:00Z",
+      "delivery_time_without_stock": "2018-05-04T00:00Z",
+      "book_binding": "Tapa blanda"
+    }
+  ],
+  "priority_image": {
+    "small": {
+      "url":
+        "//sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201712/20/00106510827725____1__210x210.jpg",
+      "ratio": 1
+    },
+    "medium": {
+      "url":
+        "//sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201712/20/00106510827725____1__440x440.jpg",
+      "ratio": 1
+    },
+    "big": {
+      "url":
+        "//sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201712/20/00106510827725____1__640x640.jpg",
+      "ratio": 1
+    },
+    "zoom": {
+      "url":
+        "//sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201712/20/00106510827725____1__1200x1200.jpg",
+      "ratio": 1
+    }
+  },
+  "attribute_groups": [
+    {
+      "type": "TABLE",
+      "attributes": [
+        {
+          "name": "Formato encuadernación:",
+          "values": {
+            "values": [
+              {
+                "value": "Tapa blanda"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Número de páginas: ",
+          "values": {
+            "values": [
+              {
+                "value": "192"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dimensiones: ",
+          "values": {
+            "values": [
+              {
+                "value": "23,5 x 22,5"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Idioma: ",
+          "values": {
+            "values": [
+              {
+                "value": "Castellano"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Colección:",
+          "values": {
+            "values": [
+              {
+                "value": "FUERA DE COLECCIÓN"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "description": [
+    {
+      "value": [
+        "<p>En <i>Maestros de la Costura</i> descubrirás todo lo necesario para iniciarte en este apasionante mundo: desde lo que has de tener en tu costurero básico hasta entender patrones, pasando por conocer las principales puntadas a mano y a máquina. Basado en el programa de TVE del mismo nombre, el libro te muestra las fotografías del paso a paso y los patrones elementales para que seas capaz de hacer tu propio proyecto.</p>"
+      ]
+    }
+  ],
+  "id": "A24532859",
+  "group_type": "SINGLE",
+  "title": "Maestros de la costura (Tapa blanda)",
+  "brand": {
+    "value": "150205056",
+    "name": "TEMAS DE HOY"
+  },
+  "distribution_way": "00",
+  "provider": "00000000",
+  "category_id": "999.6866222013",
+  "store_id": "1",
+  "authors": [
+    {
+      "title": "RTVE",
+      "url": "http://www.elcorteingles.es/ocio/r/author-rtve"
+    },
+    {
+      "title": "SHINE",
+      "url": "http://www.elcorteingles.es/ocio/r/author-shine"
+    }
+  ],
+  "product_type": "70"
+}

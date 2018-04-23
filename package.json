@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --inspect=0.0.0.0:9229",
     "lint": "eslint src/**",
-    "test": "jest",
+    "test": "jest tests",
     "precommit": "pretty-quick --staged"
   },
   "dependencies": {
